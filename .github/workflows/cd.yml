@@ -88,10 +88,21 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Generate a changelog
+        id: changelog
+        uses: orhun/git-cliff-action@v3
+        with:
+          config: cliff.toml
+          args: --verbose --bump --latest
+        env:
+          OUTPUT: latest_changelog.md
+          GITHUB_REPO: ${{ github.repository }}
+
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          bodyFile: CHANGELOG.md
+          bodyFile: latest_changelog.md
 
