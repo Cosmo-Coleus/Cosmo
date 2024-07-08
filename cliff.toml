@@ -4,7 +4,6 @@ breaking_always_bump_major = true
 initial_tag = "0.1.0"
 
 [changelog]
-# template for the changelog footer
 header = """
 # Changelog\n
 All notable changes to this project will be documented in this file.\n
@@ -58,9 +57,9 @@ postprocessors = [
 
 [git]
 # parse the commits based on https://www.conventionalcommits.org
-conventional_commits = true
+conventional_commits = false
 # filter out the commits that are not conventional
-filter_unconventional = true
+filter_unconventional = false
 # process each line of a commit as an individual commit
 split_commits = false
 # regex for preprocessing the commit messages
@@ -72,21 +71,18 @@ commit_preprocessors = [
   #{ pattern = '.*', replace_command = 'typos --write-changes -' },
 ]
 # regex for parsing and grouping commits
+
 commit_parsers = [
-  { message = "^feat", group = "<!-- 0 -->🚀 Features" },
-  { message = "^fix", group = "<!-- 1 -->🐛 Bug Fixes" },
-  { message = "^doc", group = "<!-- 3 -->📚 Documentation" },
-  { message = "^perf", group = "<!-- 4 -->⚡ Performance" },
-  { message = "^refactor", group = "<!-- 2 -->🚜 Refactor" },
-  { message = "^style", group = "<!-- 5 -->🎨 Styling" },
-  { message = "^test", group = "<!-- 6 -->🧪 Testing" },
-  { message = "^chore\\(release\\): prepare for", skip = true },
-  { message = "^chore\\(deps.*\\)", skip = true },
-  { message = "^chore\\(pr\\)", skip = true },
-  { message = "^chore\\(pull\\)", skip = true },
-  { message = "^chore|^ci", group = "<!-- 7 -->⚙️ Miscellaneous Tasks" },
-  { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
-  { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
+  { message = "^💥", group = "<!-- 0 -->💥 Breaking Changes" },
+  { message = "^✨", group = "<!-- 1 -->✨ Features" },
+  { message = "^🚑", group = "<!-- 2 -->🚑 Hotfix" },
+  { message = "^🗑️", group = "<!-- 3 -->🗑️  Deprecate Code or Dependencies" },
+  { message = "^➕", group = "<!-- 4 -->➕ Add Dependencies" },
+  { message = "^⬆️ ", group = "<!-- 5 -->⬆️  Upgrade Dependencies" },
+  { message = "^🐛", group = "<!-- 6 -->🐛 Bug Fixes" },
+  { message = "^🩹", group = "<!-- 7 -->🩹 Simple Fixes" },
+  { message = "^⚡", group = "<!-- 8 -->⚡ Performance" },
+  { body = "^🔒", group = "<!-- 9 -->🔒 Security" },
 ]
 # protect breaking changes from being skipped due to matching a skipping commit_parser
 protect_breaking_commits = false
