@@ -6,9 +6,17 @@ on:
       - main
 
 jobs:
-  deploy-release:
+  checkout:
     runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+  generate_changelog:
+    runs-on: ubuntu-latest
+    needs: checkout
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -25,28 +33,57 @@ jobs:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
-      - name: Commit a changelog
+  commit_changelog:
+    runs-on: ubuntu-latest
+    needs: generate_changelog
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Commit changelog
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update changelog"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git main
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
+  bump_version:
+    runs-on: ubuntu-latest
+    needs: commit_changelog
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          git tag -a v$(date +'%Y.%m.%d') -m "Release $(date +'%Y.%m.%d')"
+          git push origin --tags
+
+      - name: Get the new tag
+        id: get_new_tag
+        run: echo "::set-output name=new_tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
+
+  create_release:
+    runs-on: ubuntu-latest
+    needs: bump_version
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.get_new_tag.outputs.new_tag }}
+          name: Release ${{ steps.get_new_tag.outputs.new_tag }}
           bodyFile: CHANGELOG.md
-
-
-
 
