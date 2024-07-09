@@ -1,7 +1,7 @@
 use std::io::Result;
 
 
-use ratatui::{backend::Backend, crossterm::event::{self, Event, KeyCode, KeyEvent}, layout::{Constraint, Direction, Layout}, style::{Color, Style, Stylize}, text::Span, widgets::{Block, Paragraph}, Frame, Terminal};
+use ratatui::{backend::Backend, crossterm::event::{self, Event, KeyCode, KeyEvent}, layout::{Constraint, Direction, Layout, Rect}, style::{Color, Style, Stylize}, text::{Line, Span, Text}, widgets::{Block, Paragraph}, Frame, Terminal};
 
 #[derive(PartialEq, Eq)]
 enum InputMode {
@@ -40,6 +40,10 @@ impl App {
     }
 }
 
+struct CommandLine {
+    commande_buffer: String
+}
+
 pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> Result<()> {
     loop {
         terminal.draw(|frame| ui(frame, app))?;
@@ -65,22 +69,13 @@ fn ui(frame: &mut Frame, app: &App) {
 
     match app.input_mode {
         InputMode::Normal => {
-            frame.render_widget(
-                Span::styled(" NORMAL MODE ", Style::default().bold().fg(Color::Black).bg(Color::Yellow)),
-                area[1]
-            );
+            footer_line(frame, area[1], " NORMAL MODE ", Style::default().bold().fg(Color::Black).bg(Color::Yellow))
         },
         InputMode::Insert => {
-            frame.render_widget(
-                Span::styled(" INSERT MODE ", Style::default().bold().fg(Color::Black).bg(Color::Blue)),
-                area[1]
-            );
+            footer_line(frame, area[1], " INSERT MODE ", Style::default().bold().fg(Color::Black).bg(Color::Blue))
         },
         InputMode::Command => {
-            frame.render_widget(
-                Span::styled(" COMMAND MODE ", Style::default().bold().fg(Color::Black).bg(Color::Green)),
-                area[1]
-            );
+            footer_line(frame, area[1], " COMMAND MODE ", Style::default().bold().fg(Color::Black).bg(Color::Green))
         },
         InputMode::Exit => {}
     };
@@ -88,5 +83,19 @@ fn ui(frame: &mut Frame, app: &App) {
     frame.render_widget(
         Block::default(),
         area[0]
+    );
+}
+
+fn footer_line(frame: &mut Frame, area: Rect, text: &str, style: Style) {
+    let tmp_cmd_buffer = ":commande here";
+    let padding = " ".repeat(area.width as usize - (text.len() + tmp_cmd_buffer.len()));
+    let line = Line::from(vec![
+       Span::styled(tmp_cmd_buffer, Style::default().fg(Color::White)),
+       Span::from(padding),
+       Span::styled(text, style)
+    ]);
+    frame.render_widget(
+        Paragraph::new(line),
+        area
     );
 }
