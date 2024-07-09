@@ -1,7 +1,7 @@
 use std::io::Result;
 
 
-use ratatui::{backend::Backend, crossterm::event::{self, Event, KeyCode, KeyEvent}, style::Stylize, widgets::Paragraph, Frame, Terminal};
+use ratatui::{backend::Backend, crossterm::event::{self, Event, KeyCode, KeyEvent}, layout::{Constraint, Direction, Layout}, style::{Color, Style, Stylize}, text::Span, widgets::{Block, Paragraph}, Frame, Terminal};
 
 #[derive(PartialEq, Eq)]
 enum InputMode {
@@ -55,17 +55,38 @@ pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> Result<
 }
 
 fn ui(frame: &mut Frame, app: &App) {
-    let area = frame.size();
-    let text_mode = match app.input_mode {
-        InputMode::Normal => "Hello NORMAL MODE",
-        InputMode::Insert => "Hello INSERT MODE",
-        InputMode::Command => "Hello COMMAND MODE",
-        InputMode::Exit => ""
+    let area = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints(vec![
+            Constraint::Percentage(100),
+            Constraint::Length(1)
+        ])
+        .split(frame.size());
+
+    match app.input_mode {
+        InputMode::Normal => {
+            frame.render_widget(
+                Span::styled(" NORMAL MODE ", Style::default().bold().fg(Color::Black).bg(Color::Yellow)),
+                area[1]
+            );
+        },
+        InputMode::Insert => {
+            frame.render_widget(
+                Span::styled(" INSERT MODE ", Style::default().bold().fg(Color::Black).bg(Color::Blue)),
+                area[1]
+            );
+        },
+        InputMode::Command => {
+            frame.render_widget(
+                Span::styled(" COMMAND MODE ", Style::default().bold().fg(Color::Black).bg(Color::Green)),
+                area[1]
+            );
+        },
+        InputMode::Exit => {}
     };
+
     frame.render_widget(
-        Paragraph::new(text_mode)
-            .white()
-            .on_blue(),
-        area
+        Block::default(),
+        area[0]
     );
 }

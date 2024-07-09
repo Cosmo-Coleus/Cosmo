@@ -9,6 +9,7 @@ fn main() -> Result<()> {
     enable_raw_mode()?;
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
     terminal.clear()?;
+    terminal.show_cursor()?;
     let mut app = App::new();
     let _ = run_app(&mut terminal, &mut app);
 
