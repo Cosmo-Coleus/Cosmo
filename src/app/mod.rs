@@ -24,20 +24,82 @@ pub enum InputMode {
 pub struct App {
     pub input_mode: InputMode,
     pub command_line: CommandLine,
-    pub text_buffer: Vec<u8>
+    pub text_buffer: Vec<u8>,
+    pub scroll: (u16, u16)
 }
 
 impl App {
     /// Crée une nouvelle instance de [`App`].
     pub fn new() -> Self {
-        let text = "alex".as_bytes();
+        let text = "alex
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+copucou
+papa
+".as_bytes();
         let mut buffer: Vec<u8> = Vec::new();
         buffer.extend_from_slice(text);
 
         Self {
             input_mode: InputMode::Normal,
             command_line: CommandLine::new(),
-            text_buffer: buffer
+            text_buffer: buffer,
+            scroll: (0,0)
         }
     }
 

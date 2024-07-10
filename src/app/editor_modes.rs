@@ -9,7 +9,9 @@ pub fn normal_mode(app: &mut App, key: KeyCode) {
         KeyCode::Char(':') => {
             app.input_mode = InputMode::Command;
             app.command_line.command_buffer.push(':');
-        }
+        },
+        KeyCode::Down => app.scroll.0 += 1,
+        KeyCode::Up => app.scroll.0 -= 1,
         _ => {}
     }
 }

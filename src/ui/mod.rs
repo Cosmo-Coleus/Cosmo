@@ -18,7 +18,8 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         Paragraph::new(
             Text::from(std::str::from_utf8(&app.text_buffer).unwrap())
         )
-        .bg(Color::Rgb(0x2b, 0x2d, 0x3a)),
+        .bg(Color::Rgb(0x2b, 0x2d, 0x3a))
+        .scroll(app.scroll),
     area[0]);
 
     match app.input_mode {
