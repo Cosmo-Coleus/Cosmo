@@ -14,14 +14,14 @@ mod ui;
 fn main() -> Result<()> {
     stdout().execute(EnterAlternateScreen)?;
     enable_raw_mode()?;
-    core_init()?;
+    init_and_run()?;
     stdout().execute(LeaveAlternateScreen)?;
     disable_raw_mode()?;
     Ok(())
 }
 
-/// Initialise [`Terminal`](struct@Terminal) et [`App`](struct@App)
-fn core_init() -> Result<()> {
+/// Initialise [`Terminal`](struct@Terminal) et [`App`](struct@App) et run le tout.
+fn init_and_run() -> Result<()> {
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
     let mut app = App::new();
     terminal.clear()?;
