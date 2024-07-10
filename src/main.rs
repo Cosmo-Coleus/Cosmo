@@ -11,7 +11,7 @@ fn main() -> Result<()> {
     terminal.clear()?;
     terminal.show_cursor()?;
     let mut app = App::new();
-    let _ = run_app(&mut terminal, &mut app);
+    run_app(&mut terminal, &mut app)?;
 
     stdout().execute(LeaveAlternateScreen)?;
     disable_raw_mode()?;

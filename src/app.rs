@@ -29,7 +29,7 @@ impl App {
                 KeyCode::Char('i') => self.input_mode = InputMode::Insert,
                 KeyCode::Char(':') => {
                     self.input_mode = InputMode::Command;
-                    self.command_line.commande_buffer.push(':');
+                    self.command_line.command_buffer.push(':');
                 },
                 _ => {}
             },
@@ -39,16 +39,16 @@ impl App {
             },
             InputMode::Command => match key.code {
                 KeyCode::Char(insert) => {
-                    self.command_line.commande_buffer.push(insert);
+                    self.command_line.command_buffer.push(insert);
                 },
                 KeyCode::Enter => {
                     self.input_mode = InputMode::Normal;
                     check_cmd(self);
-                    self.command_line.commande_buffer = "".to_string();
+                    self.command_line.command_buffer = "".to_string();
                 }
                 KeyCode::Esc => {
                     self.input_mode = InputMode::Normal;
-                    self.command_line.commande_buffer = "".to_string();
+                    self.command_line.command_buffer = "".to_string();
                 },
                 _ => {}
             },
@@ -58,12 +58,12 @@ impl App {
 }
 
 struct CommandLine {
-    commande_buffer: String
+    command_buffer: String
 }
 
 impl CommandLine {
     const fn new() -> Self {
-        Self { commande_buffer: String::new() }
+        Self { command_buffer: String::new() }
     }
 }
 
@@ -116,9 +116,9 @@ fn footer_line(frame: &mut Frame, area: Rect, text: &str, style: Style, command_
     } else {
         &mut CommandLine::new()
     };
-    let padding = " ".repeat(area.width as usize - (text.len() + command_line.commande_buffer.len()));
+    let padding = " ".repeat(area.width as usize - (text.len() + command_line.command_buffer.len()));
     let line = Line::from(vec![
-       Span::styled(command_line.commande_buffer.as_str() , Style::default().fg(Color::White)),
+       Span::styled(command_line.command_buffer.as_str() , Style::default().fg(Color::White)),
        Span::from(padding),
        Span::styled(text, style)
     ]);
@@ -129,7 +129,7 @@ fn footer_line(frame: &mut Frame, area: Rect, text: &str, style: Style, command_
 }
 
 fn check_cmd(app: &mut App) {
-    let cmd = &app.command_line.commande_buffer;
+    let cmd = &app.command_line.command_buffer;
     if cmd == ":q" {
         app.input_mode = InputMode::Exit;
     }
