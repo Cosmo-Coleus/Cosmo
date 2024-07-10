@@ -1,4 +1,4 @@
-use app::{run_app, App};
+use app::App;
 use ratatui::{
     backend::CrosstermBackend,
     crossterm::{
@@ -25,6 +25,6 @@ fn core_init() -> Result<()> {
     let mut app = App::new();
     terminal.clear()?;
     terminal.show_cursor()?;
-    run_app(&mut terminal, &mut app)?;
+    app.run_app(&mut terminal)?;
     Ok(())
 }
