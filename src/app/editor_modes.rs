@@ -9,16 +9,18 @@ pub fn normal_mode(app: &mut App, key: KeyCode) {
         KeyCode::Char(':') => {
             app.input_mode = InputMode::Command;
             app.command_line.command_buffer.push(':');
-        },
-        KeyCode::Down => app.scroll.0 += 1,
-        KeyCode::Up => app.scroll.0 -= 1,
+        }
+        KeyCode::Down => app.editor.scroll_up(),
+        KeyCode::Up => app.editor.scroll_down(),
         _ => {}
     }
 }
 
 /// Récupère toutes les touches pressées en [`InputMode::Insert`] et les associe au comportement attendu.
 pub fn insert_mode(app: &mut App, key: KeyCode) {
-    if key == KeyCode::Esc { app.input_mode = InputMode::Normal }
+    if key == KeyCode::Esc {
+        app.input_mode = InputMode::Normal
+    }
 }
 
 /// Récupère toutes les touches pressées en [`InputMode::Command`] et les associe au comportement attendu.
@@ -42,8 +44,11 @@ pub fn command_mode(app: &mut App, key: KeyCode) {
 
 #[cfg(test)]
 mod test {
+    use crate::app::{
+        editor_modes::{command_mode, insert_mode, normal_mode},
+        App, InputMode,
+    };
     use ratatui::crossterm::event::KeyCode;
-    use crate::app::{editor_modes::{command_mode, insert_mode, normal_mode}, App, InputMode};
 
     fn setup() -> App {
         App::new()

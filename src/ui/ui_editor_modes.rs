@@ -63,6 +63,7 @@ pub fn footer_line(
         ),
         Span::from(padding),
         Span::styled(text, style),
-    ]).style(Style::default().bg(Color::Rgb(0x2f, 0x32, 0x42)));
+    ])
+    .style(Style::default().bg(Color::Rgb(0x2f, 0x32, 0x42)));
     frame.render_widget(Paragraph::new(line), area);
 }
