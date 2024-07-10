@@ -24,14 +24,20 @@ pub enum InputMode {
 pub struct App {
     pub input_mode: InputMode,
     pub command_line: CommandLine,
+    pub text_buffer: Vec<u8>
 }
 
 impl App {
     /// Crée une nouvelle instance de [`App`].
-    pub const fn new() -> Self {
+    pub fn new() -> Self {
+        let text = "alex".as_bytes();
+        let mut buffer: Vec<u8> = Vec::new();
+        buffer.extend_from_slice(text);
+
         Self {
             input_mode: InputMode::Normal,
             command_line: CommandLine::new(),
+            text_buffer: buffer
         }
     }
 

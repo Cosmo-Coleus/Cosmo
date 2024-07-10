@@ -1,9 +1,7 @@
 mod ui_editor_modes;
 use crate::app::{App, InputMode};
 use ratatui::{
-    layout::{Constraint, Direction, Layout},
-    widgets::Block,
-    Frame,
+    layout::{Constraint, Direction, Layout}, style::{Color, Stylize}, text::Text, widgets::{Block, Paragraph}, Frame
 };
 use ui_editor_modes::{ui_command_mode, ui_insert_mode, ui_normal_mode};
 
@@ -15,6 +13,13 @@ pub fn ui(frame: &mut Frame, app: &mut App) {
         .direction(Direction::Vertical)
         .constraints(vec![Constraint::Percentage(100), Constraint::Length(1)])
         .split(frame.size());
+
+    frame.render_widget(
+        Paragraph::new(
+            Text::from(std::str::from_utf8(&app.text_buffer).unwrap())
+        )
+        .bg(Color::Rgb(0x2b, 0x2d, 0x3a)),
+    area[0]);
 
     match app.input_mode {
         InputMode::Normal => ui_normal_mode(frame, area[1]),
