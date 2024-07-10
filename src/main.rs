@@ -20,6 +20,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+/// Initialise [`Terminal`](struct@Terminal) et [`App`](struct@App)
 fn core_init() -> Result<()> {
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
     let mut app = App::new();

@@ -7,7 +7,7 @@ use ratatui::{
 };
 
 use crate::app::{commands::CommandLine, App};
-
+/// Rendu du mode [`InputMode::Normal`](enum@crate::app::InputMode).
 pub fn ui_normal_mode(frame: &mut Frame, area: Rect) {
     footer_line(
         frame,
@@ -18,6 +18,7 @@ pub fn ui_normal_mode(frame: &mut Frame, area: Rect) {
     );
 }
 
+/// Rendu du mode [`InputMode::Insert`](enum@crate::app::InputMode).
 pub fn ui_insert_mode(frame: &mut Frame, area: Rect) {
     footer_line(
         frame,
@@ -28,6 +29,7 @@ pub fn ui_insert_mode(frame: &mut Frame, area: Rect) {
     );
 }
 
+/// Rendu du mode [`InputMode::Command`](enum@crate::app::InputMode).
 pub fn ui_command_mode(app: &mut App, frame: &mut Frame, area: Rect) {
     let mut command_line = &mut app.command_line;
     footer_line(
@@ -39,6 +41,7 @@ pub fn ui_command_mode(app: &mut App, frame: &mut Frame, area: Rect) {
     );
 }
 
+/// Cette fonction va très certainement changer de nom. Rendu de la ligne en bas du terminal.
 pub fn footer_line(
     frame: &mut Frame,
     area: Rect,

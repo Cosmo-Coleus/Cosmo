@@ -2,6 +2,7 @@ use ratatui::crossterm::event::KeyCode;
 
 use super::{commands::check_cmd, App, InputMode};
 
+/// Récupère toutes les touches pressées en [`InputMode::Normal`] et les associe au comportement attendu.
 pub fn normal_mode(app: &mut App, key: KeyCode) {
     match key {
         KeyCode::Char('i') => app.input_mode = InputMode::Insert,
@@ -13,6 +14,7 @@ pub fn normal_mode(app: &mut App, key: KeyCode) {
     }
 }
 
+/// Récupère toutes les touches pressées en [`InputMode::Insert`] et les associe au comportement attendu.
 pub fn insert_mode(app: &mut App, key: KeyCode) {
     match key {
         KeyCode::Esc => app.input_mode = InputMode::Normal,
@@ -20,6 +22,7 @@ pub fn insert_mode(app: &mut App, key: KeyCode) {
     }
 }
 
+/// Récupère toutes les touches pressées en [`InputMode::Command`] et les associe au comportement attendu.
 pub fn command_mode(app: &mut App, key: KeyCode) {
     match key {
         KeyCode::Char(insert) => {
