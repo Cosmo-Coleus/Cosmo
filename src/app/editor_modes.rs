@@ -16,10 +16,7 @@ pub fn normal_mode(app: &mut App, key: KeyCode) {
 
 /// Récupère toutes les touches pressées en [`InputMode::Insert`] et les associe au comportement attendu.
 pub fn insert_mode(app: &mut App, key: KeyCode) {
-    match key {
-        KeyCode::Esc => app.input_mode = InputMode::Normal,
-        _ => {}
-    }
+    if key == KeyCode::Esc { app.input_mode = InputMode::Normal }
 }
 
 /// Récupère toutes les touches pressées en [`InputMode::Command`] et les associe au comportement attendu.
