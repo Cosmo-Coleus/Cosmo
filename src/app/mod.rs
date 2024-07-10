@@ -10,7 +10,7 @@ use std::io::Result;
 pub mod commands;
 mod editor_modes;
 
-#[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq, Debug)]
 pub enum InputMode {
     Normal,
     Insert,
