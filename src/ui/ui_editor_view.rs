@@ -10,7 +10,7 @@ pub fn ui_editor_view(app: &mut App, frame: &mut Frame, area: Rect) {
     for (i, line) in lines.iter().enumerate() {
         new_lines.push(Line::from(vec![
             Span::styled(format!("  {:<4} ", i + 1), Style::default().fg(Color::Rgb(0x7e, 0x82, 0x94))),
-            Span::styled(format!("{} ", line.to_string()), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().fg(Color::White)),
         ]));
     }
 
