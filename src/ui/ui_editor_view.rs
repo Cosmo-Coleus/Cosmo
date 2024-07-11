@@ -2,6 +2,7 @@ use ratatui::{layout::Rect, style::{Color, Style, Stylize}, text::{Line, Span}, 
 
 use crate::app::App;
 
+/// Gère le rendu graphique de l'éditeur de texte
 pub fn ui_editor_view(app: &mut App, frame: &mut Frame, area: Rect) {
     let text = std::str::from_utf8(&app.editor.text_buffer).unwrap();
     let lines: Vec<&str> = text.lines().collect();

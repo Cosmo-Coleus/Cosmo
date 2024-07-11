@@ -77,6 +77,7 @@ papa
         }
     }
 
+    /// Permet de scroller le text de [`Editor`](struct@Editor) d'un ligne vers le haut
     pub fn scroll_up(self: &mut Editor) {
         let num_lines = self.text_buffer.lines().count();
         if self.scroll.0 < num_lines as u16 - 1 {
@@ -84,6 +85,7 @@ papa
         }
     }
 
+    /// Permet de scroller le text de [`Editor`](struct@Editor) d'un ligne vers le bas
     pub fn scroll_down(self: &mut Editor) {
         if self.scroll.0 > 0 {
             self.scroll.0 -= 1;
