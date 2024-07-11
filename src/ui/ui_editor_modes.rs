@@ -6,7 +6,7 @@ use ratatui::{
     Frame,
 };
 
-use crate::core::{commands::CommandLine, core::Core};
+use crate::core::{commands::CommandLine, Core};
 /// Rendu du mode [`InputMode::Normal`](enum@crate::app::InputMode).
 pub fn ui_normal_mode(frame: &mut Frame, area: Rect) {
     footer_line(

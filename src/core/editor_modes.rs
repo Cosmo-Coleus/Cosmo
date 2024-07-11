@@ -1,6 +1,6 @@
 use ratatui::crossterm::event::KeyCode;
 
-use super::{commands::check_cmd, core::Core, InputMode};
+use super::{commands::check_cmd, Core, InputMode};
 
 /// Récupère toutes les touches pressées en [`InputMode::Normal`] et les associe au comportement attendu.
 pub fn normal_mode(app: &mut Core, key: KeyCode) {
@@ -28,7 +28,7 @@ pub fn command_mode(app: &mut Core, key: KeyCode) {
     match key {
         KeyCode::Char(insert) => {
             app.command_line.command_buffer.push(insert);
-        },
+        }
         KeyCode::Backspace => {
             app.command_line.command_buffer.pop();
         }
@@ -48,7 +48,8 @@ pub fn command_mode(app: &mut Core, key: KeyCode) {
 #[cfg(test)]
 mod test {
     use crate::core::{
-        core::Core, editor_modes::{command_mode, insert_mode, normal_mode}, InputMode
+        editor_modes::{command_mode, insert_mode, normal_mode},
+        Core, InputMode,
     };
     use ratatui::crossterm::event::KeyCode;
 

@@ -1,4 +1,7 @@
-use std::{fs::File, io::{BufRead, BufReader, Read}};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader, Read},
+};
 
 /// Representation des donnees de l'editeur
 pub struct Editor {
@@ -8,8 +11,7 @@ pub struct Editor {
 
 impl Editor {
     pub fn new() -> Self {
-        let text = ""
-        .as_bytes();
+        let text = "".as_bytes();
         let mut buffer: Vec<u8> = Vec::new();
         buffer.extend_from_slice(text);
         Self {

@@ -1,4 +1,4 @@
-use super::{core::Core, InputMode};
+use super::{Core, InputMode};
 
 /// Réprésente la ligne de commande utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {

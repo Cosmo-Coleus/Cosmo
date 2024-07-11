@@ -3,9 +3,7 @@ mod core;
 /// Gestion des inputs de **Cosmo**
 mod input;
 
-
-
-
+use core::Core;
 use ratatui::{
     backend::CrosstermBackend,
     crossterm::{
@@ -14,7 +12,6 @@ use ratatui::{
     },
     Terminal,
 };
-use core::core::Core;
 use std::io::{stdout, Result};
 mod ui;
 
