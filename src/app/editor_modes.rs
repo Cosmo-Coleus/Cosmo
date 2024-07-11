@@ -28,6 +28,9 @@ pub fn command_mode(app: &mut App, key: KeyCode) {
     match key {
         KeyCode::Char(insert) => {
             app.command_line.command_buffer.push(insert);
+        },
+        KeyCode::Backspace => {
+            app.command_line.command_buffer.pop();
         }
         KeyCode::Enter => {
             app.input_mode = InputMode::Normal;

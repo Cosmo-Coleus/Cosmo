@@ -33,7 +33,7 @@ impl Editor {
     }
 
     pub fn open_file(self: &mut Editor, cmd: String) {
-        let file = File::open(&cmd).unwrap();
+        let file = File::open(cmd).unwrap();
         let mut buf_reader = BufReader::new(file);
         let mut content = String::new();
         buf_reader.read_to_string(&mut content).unwrap();
