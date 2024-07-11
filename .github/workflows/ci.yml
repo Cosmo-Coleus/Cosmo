@@ -27,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Clippy
-      run: cargo clippy --verbose -- -W clippy::all
+      run: cargo clippy --verbose -- -D clippy::all
   build:
     runs-on: ubuntu-latest
     needs: ["security_audit", "clippy"]
