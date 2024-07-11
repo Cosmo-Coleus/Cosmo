@@ -1,4 +1,11 @@
-use app::App;
+/// Gestion de l'ensemble de **Cosmo**
+mod core;
+/// Gestion des inputs de **Cosmo**
+mod input;
+
+
+
+
 use ratatui::{
     backend::CrosstermBackend,
     crossterm::{
@@ -7,8 +14,8 @@ use ratatui::{
     },
     Terminal,
 };
+use core::core::Core;
 use std::io::{stdout, Result};
-mod app;
 mod ui;
 
 fn main() -> Result<()> {
@@ -23,9 +30,9 @@ fn main() -> Result<()> {
 /// Initialise [`Terminal`](struct@Terminal) et [`App`](struct@App) et run le tout.
 fn init_and_run() -> Result<()> {
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
-    let mut app = App::new();
+    let mut core = Core::new();
     terminal.clear()?;
     terminal.show_cursor()?;
-    app.run_app(&mut terminal)?;
+    core.run_app(&mut terminal)?;
     Ok(())
 }

@@ -1,36 +1,19 @@
-pub mod commands;
-mod editor_modes;
-mod editor_view;
-mod utils;
-
-use crate::ui::ui;
-use commands::CommandLine;
-use editor_modes::{command_mode, insert_mode, normal_mode};
-use editor_view::Editor;
-use ratatui::{
-    backend::Backend,
-    crossterm::event::{self, Event, KeyEvent},
-    Terminal,
-};
 use std::io::Result;
 
-/// Liste les différents modes d'interaction de l'IDE.
-#[derive(PartialEq, Eq, Debug)]
-pub enum InputMode {
-    Normal,
-    Insert,
-    Command,
-    Exit,
-}
+use ratatui::{backend::Backend, crossterm::event::{self, Event, KeyEvent}, Terminal};
 
-/// Gère tout ce qui n'est pas graphique.
-pub struct App {
+use crate::ui::ui;
+
+use super::{commands::CommandLine, editor::Editor, editor_modes::{command_mode, insert_mode, normal_mode}, InputMode};
+
+/// Representation des donnees de **Cosmo**
+pub struct Core {
     pub editor: Editor,
     pub input_mode: InputMode,
     pub command_line: CommandLine,
 }
 
-impl App {
+impl Core {
     /// Crée une nouvelle instance de [`App`].
     pub fn new() -> Self {
         Self {
@@ -43,7 +26,7 @@ impl App {
 
     /// # Warning
     /// Cette fonction est temporaire et sera très certainement supprimé dans le futur.
-    fn handle_modes(self: &mut App, key: KeyEvent) {
+    fn handle_modes(self: &mut Core, key: KeyEvent) {
         match self.input_mode {
             InputMode::Normal => normal_mode(self, key.code),
             InputMode::Insert => insert_mode(self, key.code),
@@ -53,7 +36,7 @@ impl App {
     }
 
     /// Contient la boucle de rendu et d'évévement de **Cosmo**.
-    pub fn run_app<B: Backend>(self: &mut App, terminal: &mut Terminal<B>) -> Result<()> {
+    pub fn run_app<B: Backend>(self: &mut Core, terminal: &mut Terminal<B>) -> Result<()> {
         loop {
             terminal.draw(|frame| ui(frame, self))?;
             if let Event::Key(key) = event::read()? {

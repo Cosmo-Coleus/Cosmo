@@ -1,4 +1,4 @@
-use super::{App, InputMode};
+use super::{core::Core, InputMode};
 
 /// Réprésente la ligne de commande utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {
@@ -15,7 +15,7 @@ impl CommandLine {
 
 /// # Warning
 /// Cette fonction est temporaire et sera très certainement supprimé dans le futur
-pub fn check_cmd(app: &mut App) {
+pub fn check_cmd(app: &mut Core) {
     let cmd = &app.command_line.command_buffer;
     match &cmd[..2] {
         ":q" => app.input_mode = InputMode::Exit,

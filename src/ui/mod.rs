@@ -1,7 +1,7 @@
 mod ui_editor_modes;
 mod ui_editor_view;
 
-use crate::app::{App, InputMode};
+use crate::core::{core::Core, InputMode};
 use ratatui::{
     layout::{Constraint, Direction, Layout}, widgets::Block, Frame
 };
@@ -11,7 +11,7 @@ use ui_editor_view::ui_editor_view;
 /// # Warning
 /// Cette fonction est temporaire et sera très certainement supprimé dans le futur.
 /// Crée le rendu en fonction de l'[`InputMode`](enum@InputMode) actuel.
-pub fn ui(frame: &mut Frame, app: &mut App) {
+pub fn ui(frame: &mut Frame, app: &mut Core) {
     let area = Layout::default()
         .direction(Direction::Vertical)
         .constraints(vec![Constraint::Percentage(100), Constraint::Length(1)])

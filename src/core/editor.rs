@@ -1,5 +1,6 @@
 use std::{fs::File, io::{BufRead, BufReader, Read}};
 
+/// Representation des donnees de l'editeur
 pub struct Editor {
     pub scroll: (u16, u16),
     pub text_buffer: Vec<u8>,

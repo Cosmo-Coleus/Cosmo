@@ -6,7 +6,7 @@ use ratatui::{
     Frame,
 };
 
-use crate::app::{commands::CommandLine, App};
+use crate::core::{commands::CommandLine, core::Core};
 /// Rendu du mode [`InputMode::Normal`](enum@crate::app::InputMode).
 pub fn ui_normal_mode(frame: &mut Frame, area: Rect) {
     footer_line(
@@ -30,7 +30,7 @@ pub fn ui_insert_mode(frame: &mut Frame, area: Rect) {
 }
 
 /// Rendu du mode [`InputMode::Command`](enum@crate::app::InputMode).
-pub fn ui_command_mode(app: &mut App, frame: &mut Frame, area: Rect) {
+pub fn ui_command_mode(app: &mut Core, frame: &mut Frame, area: Rect) {
     let mut command_line = &mut app.command_line;
     footer_line(
         frame,
