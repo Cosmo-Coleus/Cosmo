@@ -1,4 +1,4 @@
-use std::io::BufRead;
+use std::{fs::File, io::{BufRead, BufReader, Read}};
 
 pub struct Editor {
     pub scroll: (u16, u16),
@@ -7,67 +7,7 @@ pub struct Editor {
 
 impl Editor {
     pub fn new() -> Self {
-        let text = "alex
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-copucou
-papa
-"
+        let text = ""
         .as_bytes();
         let mut buffer: Vec<u8> = Vec::new();
         buffer.extend_from_slice(text);
@@ -90,5 +30,13 @@ papa
         if self.scroll.0 > 0 {
             self.scroll.0 -= 1;
         }
+    }
+
+    pub fn open_file(self: &mut Editor, cmd: String) {
+        let file = File::open(&cmd).unwrap();
+        let mut buf_reader = BufReader::new(file);
+        let mut content = String::new();
+        buf_reader.read_to_string(&mut content).unwrap();
+        self.text_buffer = Vec::from(content);
     }
 }

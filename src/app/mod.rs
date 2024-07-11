@@ -1,6 +1,7 @@
 pub mod commands;
 mod editor_modes;
 mod editor_view;
+mod utils;
 
 use crate::ui::ui;
 use commands::CommandLine;
