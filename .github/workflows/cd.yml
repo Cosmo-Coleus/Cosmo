@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+env:
+  TAG_VERSION: v0.0.0
 
 jobs:
   checkout:
@@ -23,17 +25,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install git-cliff
+        uses: taiki-e/install-action@git-cliff
+
       - name: Generate a changelog
         id: changelog
-        uses: orhun/git-cliff-action@v3
-        with:
-          config: cliff.toml
-          args: --verbose --bump
-        env:
-          OUTPUT: CHANGELOG.md
-          GITHUB_REPO: ${{ github.repository }}
-
-      - name: Upload changelog for review
+        run: git cliff --bump -o CHANGELOG.md
+          
+      - name: Upload changelog for review         
         uses: actions/upload-artifact@v2
         with:
           name: changelog
@@ -82,11 +81,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install git-cliff
+        uses: taiki-e/install-action@git-cliff
+
+      - name: Create and push new tag
+        run: |
+          git cliff --bump -o CHANGELOG.md
+          export TAG_VERSION=$(git cliff --bumped-version)
+          git tag $TAG_VERSION
+          git push origin $TAG_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate a changelog
         id: changelog
@@ -102,7 +107,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          tag: $TAG_VERSION
+          name: Release $TAG_VERSION
           bodyFile: latest_changelog.md
-
