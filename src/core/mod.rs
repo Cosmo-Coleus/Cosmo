@@ -1,7 +1,9 @@
 /// Gestion de l'editeur **Cosmo**
 mod editor;
+/// Gestion des commandes
+pub mod commands;
 
-use commands::CommandLine;
+use commandes::CommandLine;
 use editor::Editor;
 use ratatui::{
     backend::Backend,
@@ -11,13 +13,13 @@ use ratatui::{
 use std::io::Result;
 
 use crate::{input::handler::handler_input, ui::ui};
-pub mod commands;
+pub mod commandes;
 pub mod editor_modes;
 mod editor_view;
 mod utils;
 
 /// Liste les différents modes d'interaction de l'IDE.
-#[derive(PartialEq, Eq, Debug)]
+#[derive(PartialEq, Eq, Debug, Clone, Copy)]
 pub enum InputMode {
     Normal,
     Insert,
