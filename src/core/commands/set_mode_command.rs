@@ -1,5 +1,4 @@
 use crate::core::{editor::Editor, Core, InputMode};
-
 use super::Command;
 
 pub struct SetInsertMode;
@@ -31,7 +30,7 @@ impl Command for SetExitMode {
     }
 }
 
-impl Editor{
+impl Editor {
     fn set_mode(self: &mut Editor, mode: InputMode) {
         self.input_mode = mode;
     }

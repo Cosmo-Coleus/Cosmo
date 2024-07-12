@@ -54,8 +54,7 @@ pub fn footer_line(
     } else {
         &mut CommandLine::new()
     };
-    let padding =
-        " ".repeat(area.width as usize - (text.len() + command_line.buffer.len()));
+    let padding = " ".repeat(area.width as usize - (text.len() + command_line.buffer.len()));
     let line = Line::from(vec![
         Span::styled(
             command_line.buffer.as_str(),

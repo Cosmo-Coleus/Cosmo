@@ -1,6 +1,7 @@
+use crate::core::{
+    commands::command_invoker::CommandInvoker, modes::{command_mode::command_mode, insert_mode::insert_mode, normal_mode::normal_mode}, Core, InputMode
+};
 use ratatui::crossterm::event::KeyCode;
-
-use crate::core::{command_line::CommandLine, commands::command_invoker::CommandInvoker, editor_modes::{command_mode, insert_mode, normal_mode}, Core, InputMode};
 
 /// Recupere les KeyCode pour ensuite les traiter en fonction du context ([`InputMode`](enum@InputMode))
 pub fn handler_input(key: KeyCode, core: &mut Core) {
@@ -19,7 +20,7 @@ fn handler_input_nomal_mode(key: KeyCode, invoker: &mut CommandInvoker) {
 }
 
 fn handler_input_insert_mode(key: KeyCode, invoker: &mut CommandInvoker) {
-   insert_mode(key, invoker);
+    insert_mode(key, invoker);
 }
 
 fn handler_input_command_mode(key: KeyCode, invoker: &mut CommandInvoker) {

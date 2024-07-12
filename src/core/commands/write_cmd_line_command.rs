@@ -1,5 +1,4 @@
 use crate::core::command_line::CommandLine;
-
 use super::Command;
 
 pub struct WriteChar(pub char);

@@ -2,7 +2,6 @@ use std::{
     fs::File,
     io::{BufReader, Read},
 };
-
 use super::InputMode;
 
 /// Representation des donnees de l'editeur
