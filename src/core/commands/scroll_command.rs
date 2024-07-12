@@ -8,13 +8,13 @@ pub struct ScrollUpCommand;
 pub struct ScrollDownCommand;
 
 impl Command for ScrollUpCommand  {
-    fn execute(self: &mut ScrollUpCommand, editor: &mut Editor) {
+    fn execute_editor(&mut self, editor: &mut Editor) {
         editor.scroll_up();
     }
 }
 
 impl Command for ScrollDownCommand  {
-    fn execute(self: &mut ScrollDownCommand, editor: &mut Editor) {
+    fn execute_editor(&mut self, editor: &mut Editor) {
         editor.scroll_down();
     }
 }

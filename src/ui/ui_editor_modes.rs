@@ -55,10 +55,10 @@ pub fn footer_line(
         &mut CommandLine::new()
     };
     let padding =
-        " ".repeat(area.width as usize - (text.len() + command_line.command_buffer.len()));
+        " ".repeat(area.width as usize - (text.len() + command_line.buffer.len()));
     let line = Line::from(vec![
         Span::styled(
-            command_line.command_buffer.as_str(),
+            command_line.buffer.as_str(),
             Style::default().fg(Color::White),
         ),
         Span::from(padding),

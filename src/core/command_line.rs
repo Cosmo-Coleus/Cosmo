@@ -2,29 +2,21 @@ use super::Core;
 
 /// Réprésente la ligne de commande utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {
-    pub command_buffer: String,
+    pub buffer: String,
 }
 
 impl CommandLine {
     pub const fn new() -> Self {
         Self {
-            command_buffer: String::new(),
+            buffer: String::new(),
         }
-    }
-
-    pub fn add_char_in_command_line(self: &mut CommandLine, ch: char) {
-        self.command_buffer.push(ch);
-    }
-
-    pub fn remove_char_in_command_line(self: &mut CommandLine) {
-        self.command_buffer.pop();
     }
 }
 
 /// # Warning
 /// Cette fonction est temporaire et sera très certainement supprimé dans le futur
 pub fn check_cmd(app: &mut Core) {
-    let cmd = &app.command_line.command_buffer;
+    let cmd = &app.command_line.buffer;
     match &cmd[..2] {
        // ":q" => app.input_mode = InputMode::Exit,
        // ":e" => app.editor.open_file(cmd[2..].trim().to_string()),
