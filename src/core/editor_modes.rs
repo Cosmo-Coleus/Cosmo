@@ -1,6 +1,6 @@
 use ratatui::crossterm::event::KeyCode;
 
-use super::{commandes::check_cmd, commands::{command_invoker::CommandInvoker, scroll_command::{ScrollDownCommand, ScrollUpCommand}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}}, Core, InputMode};
+use super::{command_line::CommandLine, commands::{command_invoker::CommandInvoker, scroll_command::{ScrollDownCommand, ScrollUpCommand}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}}};
 
 /// Récupère toutes les touches pressées en [`InputMode::Normal`] et les associe au comportement attendu.
 pub fn normal_mode(key: KeyCode, invoker: &mut CommandInvoker) {
@@ -23,13 +23,13 @@ pub fn insert_mode(key: KeyCode, invoker: &mut CommandInvoker) {
 }
 
 /// Récupère toutes les touches pressées en [`InputMode::Command`] et les associe au comportement attendu.
-pub fn command_mode(key: KeyCode, invoker: &mut CommandInvoker) {
+pub fn command_mode(key: KeyCode, invoker: &mut CommandInvoker, command_line: &mut CommandLine) {
     match key {
-        KeyCode::Char(insert) => {
-            //app.command_line.command_buffer.push(insert);
+        KeyCode::Char(ch) => {
+            command_line.add_char_in_command_line(ch)
         }
         KeyCode::Backspace => {
-            //app.command_line.command_buffer.pop();
+            command_line.remove_char_in_command_line()
         }
         KeyCode::Enter => {
             invoker.execute_command(SetNormalMode)

@@ -3,7 +3,7 @@ mod editor;
 /// Gestion des commandes
 pub mod commands;
 
-use commandes::CommandLine;
+use command_line::CommandLine;
 use editor::Editor;
 use ratatui::{
     backend::Backend,
@@ -13,9 +13,9 @@ use ratatui::{
 use std::io::Result;
 
 use crate::{input::handler::handler_input, ui::ui};
-pub mod commandes;
+pub mod command_line;
 pub mod editor_modes;
-mod editor_view;
+
 mod utils;
 
 /// Liste les différents modes d'interaction de l'IDE.
@@ -30,7 +30,6 @@ pub enum InputMode {
 /// Representation des donnees de **Cosmo**
 pub struct Core {
     pub editor: Editor,
-    pub input_mode: InputMode,
     pub command_line: CommandLine,
 }
 
@@ -39,7 +38,6 @@ impl Core {
     pub fn new() -> Self {
         Self {
             editor: Editor::new(),
-            input_mode: InputMode::Normal,
             command_line: CommandLine::new(),
         }
     }
@@ -51,7 +49,7 @@ impl Core {
             if let Event::Key(key) = event::read()? {
                 handler_input(key.code, self)
             }
-            if self.input_mode == InputMode::Exit {
+            if self.editor.input_mode == InputMode::Exit {
                 break;
             }
         }

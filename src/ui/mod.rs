@@ -22,7 +22,7 @@ pub fn ui(frame: &mut Frame, app: &mut Core) {
     frame.render_widget(Block::default(), area[0]);
     ui_editor_view(app, frame, area[0]);
 
-    match app.input_mode {
+    match app.editor.input_mode {
         InputMode::Normal => ui_normal_mode(frame, area[1]),
         InputMode::Insert => ui_insert_mode(frame, area[1]),
         InputMode::Command => ui_command_mode(app, frame, area[1]),

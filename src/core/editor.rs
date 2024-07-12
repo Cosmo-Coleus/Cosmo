@@ -3,8 +3,11 @@ use std::{
     io::{BufReader, Read},
 };
 
+use super::InputMode;
+
 /// Representation des donnees de l'editeur
 pub struct Editor {
+    pub input_mode: InputMode,
     pub scroll: (u16, u16),
     pub text_buffer: Vec<u8>,
 }
@@ -15,6 +18,7 @@ impl Editor {
         let mut buffer: Vec<u8> = Vec::new();
         buffer.extend_from_slice(text);
         Self {
+            input_mode: InputMode::Normal,
             scroll: (0, 0),
             text_buffer: buffer,
         }

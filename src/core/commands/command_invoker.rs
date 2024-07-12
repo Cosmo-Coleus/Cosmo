@@ -1,17 +1,17 @@
-use crate::core::Core;
+use crate::core::editor::Editor;
 
 use super::Command;
 
 pub struct CommandInvoker<'a> {
-    core: &'a mut Core
+    pub editor: &'a mut Editor
 }
 
 impl<'a> CommandInvoker<'a> {
-    pub fn new(core: &'a mut Core) -> Self {
-        CommandInvoker { core }
+    pub fn new(editor: &'a mut Editor) -> Self {
+        CommandInvoker { editor }
     }
 
     pub fn execute_command(self: &mut CommandInvoker<'a>, mut command: impl Command + 'static) {
-        command.execute(self.core);
+        command.execute(self.editor);
     }
 }

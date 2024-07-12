@@ -1,4 +1,4 @@
-use crate::core::{Core, InputMode};
+use crate::core::{editor::Editor, InputMode};
 
 use super::Command;
 
@@ -8,31 +8,31 @@ pub struct SetCommandMode;
 pub struct SetExitMode;
 
 impl Command for SetInsertMode {
-    fn execute(&mut self, core: &mut Core) {
-        core.set_mode(InputMode::Insert);
+    fn execute(&mut self, editor: &mut Editor) {
+        editor.set_mode(InputMode::Insert);
     }
 }
 
 impl Command for SetNormalMode {
-    fn execute(&mut self, core: &mut Core) {
-        core.set_mode(InputMode::Normal);
+    fn execute(&mut self, editor: &mut Editor) {
+        editor.set_mode(InputMode::Normal);
     }
 }
 
 impl Command for SetCommandMode {
-    fn execute(&mut self, core: &mut Core) {
-        core.set_mode(InputMode::Command);
+    fn execute(&mut self, editor: &mut Editor) {
+        editor.set_mode(InputMode::Command);
     }
 }
 
 impl Command for SetExitMode {
-    fn execute(&mut self, core: &mut Core) {
-        core.set_mode(InputMode::Exit);
+    fn execute(&mut self, editor: &mut Editor) {
+        editor.set_mode(InputMode::Exit);
     }
 }
 
-impl Core{
-    fn set_mode(self: &mut Core, mode: InputMode) {
+impl Editor{
+    fn set_mode(self: &mut Editor, mode: InputMode) {
         self.input_mode = mode;
     }
 }
