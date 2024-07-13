@@ -15,9 +15,9 @@ impl Command for RunCmdLine {
 }
 
 impl CommandLine {
-    // Temporaire
     fn cmd_check(self: &CommandLine, queue: &mut CommandsQueue) {
         let parsed_cmd = self.parser();
-        TextCommand::q_text_command(parsed_cmd, ":q", queue)
+        TextCommand::quit_text_command(&parsed_cmd, ":q", queue);
+        TextCommand::edit_file_text_command(&parsed_cmd, ":e", queue);
     }
 }

@@ -23,7 +23,7 @@ impl Editor {
         }
     }
 
-    pub fn open_file(self: &mut Editor, cmd: String) {
+    pub fn open_file(self: &mut Editor, cmd: &String) {
         let file = File::open(cmd).unwrap();
         let mut buf_reader = BufReader::new(file);
         let mut content = String::new();

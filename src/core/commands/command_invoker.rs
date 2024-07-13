@@ -1,9 +1,5 @@
 use super::{
-    run_cmd_line_command::RunCmdLine,
-    scroll_command::{ScrollDown, ScrollUp},
-    set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode},
-    write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar},
-    Command, Commands,
+    manage_file::OpenFile, run_cmd_line_command::RunCmdLine, scroll_command::{ScrollDown, ScrollUp}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}, write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar}, Command, Commands
 };
 use crate::core::Core;
 
@@ -33,6 +29,7 @@ impl<'a> CommandInvoker<'a> {
             Commands::RemoveChar => Box::new(RemoveChar),
             Commands::CleanBuffer => Box::new(CleanBuffer),
             Commands::RunCmdLine => Box::new(RunCmdLine),
+            Commands::OpenFile(file) => Box::new(OpenFile(file)),
         };
         cmd.execute_core(self.core);
         cmd.execute_editor(&mut self.core.editor);
