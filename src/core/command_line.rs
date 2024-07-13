@@ -1,6 +1,6 @@
 use super::{
-    commands::{Command, Commands},
-    queue::{self, CommandsQueue},
+    commands::Commands,
+    queue::CommandsQueue,
 };
 
 pub struct ParsedCommand {
@@ -22,7 +22,7 @@ impl CommandLine {
 
     pub fn parser(&self) -> ParsedCommand {
         let buf = self.buffer.clone();
-        let mut tokens: Vec<String> = buf.split(" ").map(str::to_string).collect();
+        let mut tokens: Vec<String> = buf.split(' ').map(str::to_string).collect();
         ParsedCommand {
             cmd: tokens[0].clone(),
             args: tokens.split_off(1),
