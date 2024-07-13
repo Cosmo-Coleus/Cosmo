@@ -1,3 +1,4 @@
+use crate::{input::handler::handler_input, ui::ui};
 use command_line::CommandLine;
 use commands::command_invoker::CommandInvoker;
 use editor::Editor;
@@ -8,17 +9,15 @@ use ratatui::{
     Terminal,
 };
 use std::{io::Result, time::Duration};
-use crate::{input::handler::handler_input, ui::ui};
 
+pub mod command_line;
 /// Gestion de toutes les actions possible dans **Cosmo**
 pub mod commands;
 /// Gestion de l'editeur **Cosmo**
 mod editor;
-pub mod queue;
-pub mod command_line;
 pub mod modes;
+pub mod queue;
 mod utils;
-
 
 /// Liste les différents modes d'interaction de l'IDE.
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
@@ -33,7 +32,7 @@ pub enum InputMode {
 pub struct Core {
     pub editor: Editor,
     pub command_line: CommandLine,
-    pub queue: CommandsQueue
+    pub queue: CommandsQueue,
 }
 
 impl Core {
@@ -42,7 +41,7 @@ impl Core {
         Self {
             editor: Editor::new(),
             command_line: CommandLine::new(),
-            queue: CommandsQueue::new()
+            queue: CommandsQueue::new(),
         }
     }
 

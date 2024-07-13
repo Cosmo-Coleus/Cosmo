@@ -1,5 +1,7 @@
 use crate::core::{
-    commands::command_invoker::CommandInvoker, modes::{command_mode::command_mode, insert_mode::insert_mode, normal_mode::normal_mode}, queue::{self, CommandsQueue}, Core, InputMode
+    modes::{command_mode::command_mode, insert_mode::insert_mode, normal_mode::normal_mode},
+    queue::CommandsQueue,
+    InputMode,
 };
 use ratatui::crossterm::event::KeyCode;
 
@@ -18,9 +20,9 @@ fn handler_input_nomal_mode(key: KeyCode, queue: &mut CommandsQueue) {
 }
 
 fn handler_input_insert_mode(key: KeyCode, queue: &mut CommandsQueue) {
-    //insert_mode(key, queue);
+    insert_mode(key, queue);
 }
 
 fn handler_input_command_mode(key: KeyCode, queue: &mut CommandsQueue) {
-   //command_mode(key, queue);
+    command_mode(key, queue);
 }

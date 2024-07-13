@@ -1,9 +1,9 @@
-use crate::core::{editor::Editor, Core, InputMode};
 use super::Command;
+use crate::core::{editor::Editor, Core, InputMode};
 
-struct SetInsertMode;
-struct SetNormalMode;
-struct SetCommandMode;
+pub struct SetInsertMode;
+pub struct SetNormalMode;
+pub struct SetCommandMode;
 pub struct SetExitMode;
 
 impl Command for SetInsertMode {

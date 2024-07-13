@@ -1,10 +1,10 @@
 use ratatui::crossterm::event::KeyCode;
 
-use crate::core::commands::command_invoker::CommandInvoker;
+use crate::core::{commands::Commands, queue::CommandsQueue};
 
 /// Récupère toutes les touches pressées en [`InputMode::Insert`] et les associe au comportement attendu.
-pub fn insert_mode(key: KeyCode, invoker: &mut CommandInvoker) {
+pub fn insert_mode(key: KeyCode, queue: &mut CommandsQueue) {
     if key == KeyCode::Esc {
-        //invoker.execute_command(SetNormalMode)
+        queue.push_cmd(Commands::SetNormalMode)
     }
 }

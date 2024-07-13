@@ -1,10 +1,10 @@
 use super::{command_line::CommandLine, editor::Editor, Core};
 
 pub mod command_invoker;
-pub mod scroll_command;
-pub mod set_mode_command;
-pub mod write_cmd_line_command;
-pub mod run_cmd_line_command;
+mod run_cmd_line_command;
+mod scroll_command;
+mod set_mode_command;
+mod write_cmd_line_command;
 
 pub trait Command {
     fn execute_core(&mut self, _core: &mut Core) {}
@@ -19,8 +19,8 @@ pub enum Commands {
     SetNormalMode,
     SetCommandMode,
     SetExitMode,
-    WriteChar,
+    WriteChar(char),
     RemoveChar,
     CleanBuffer,
-    RunCmdLine
+    RunCmdLine,
 }

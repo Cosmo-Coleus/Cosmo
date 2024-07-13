@@ -1,5 +1,10 @@
-use crate::core::{queue::CommandsQueue, Core};
-use super::{set_mode_command::SetExitMode, Command, Commands};
+use super::{
+    scroll_command::{ScrollDown, ScrollUp},
+    set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode},
+    write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar},
+    Command, Commands,
+};
+use crate::core::Core;
 
 pub struct CommandInvoker<'a> {
     pub core: &'a mut Core,
@@ -16,20 +21,20 @@ impl<'a> CommandInvoker<'a> {
     }
 
     pub fn execute_command(self: &mut CommandInvoker<'a>, cmds: Commands) {
-        //command.execute_core(self.core);
-        let mut cmd = match cmds {
-            Commands::ScrollUp => todo!(),
-            Commands::ScrollDown => todo!(),
-            Commands::SetInsertMode => todo!(),
-            Commands::SetNormalMode => todo!(),
-            Commands::SetCommandMode => todo!(),
-            Commands::SetExitMode => SetExitMode,
-            Commands::WriteChar => todo!(),
-            Commands::RemoveChar => todo!(),
-            Commands::CleanBuffer => todo!(),
+        let mut cmd: Box<dyn Command> = match cmds {
+            Commands::ScrollUp => Box::new(ScrollUp),
+            Commands::ScrollDown => Box::new(ScrollDown),
+            Commands::SetInsertMode => Box::new(SetInsertMode),
+            Commands::SetNormalMode => Box::new(SetNormalMode),
+            Commands::SetCommandMode => Box::new(SetCommandMode),
+            Commands::SetExitMode => Box::new(SetExitMode),
+            Commands::WriteChar(ch) => Box::new(WriteChar(ch)),
+            Commands::RemoveChar => Box::new(RemoveChar),
+            Commands::CleanBuffer => Box::new(CleanBuffer),
             Commands::RunCmdLine => todo!(),
         };
+        cmd.execute_core(self.core);
         cmd.execute_editor(&mut self.core.editor);
-        //command.execute_cmd_line(&mut self.core.command_line);
+        cmd.execute_cmd_line(&mut self.core.command_line);
     }
 }

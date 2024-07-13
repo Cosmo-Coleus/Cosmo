@@ -9,7 +9,6 @@ use ratatui::{
 };
 use std::io::{stdout, Result};
 
-
 /// Gestion de l'ensemble de **Cosmo**
 mod core;
 /// Gestion des inputs de **Cosmo**

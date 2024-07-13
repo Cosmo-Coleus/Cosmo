@@ -1,5 +1,5 @@
-use crate::core::command_line::CommandLine;
 use super::Command;
+use crate::core::command_line::CommandLine;
 
 pub struct WriteChar(pub char);
 pub struct RemoveChar;

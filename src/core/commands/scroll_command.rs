@@ -1,17 +1,17 @@
-use std::io::BufRead;
-use crate::core::editor::Editor;
 use super::Command;
+use crate::core::editor::Editor;
+use std::io::BufRead;
 
-pub struct ScrollUpCommand;
-pub struct ScrollDownCommand;
+pub struct ScrollUp;
+pub struct ScrollDown;
 
-impl Command for ScrollUpCommand {
+impl Command for ScrollUp {
     fn execute_editor(&mut self, editor: &mut Editor) {
         editor.scroll_up();
     }
 }
 
-impl Command for ScrollDownCommand {
+impl Command for ScrollDown {
     fn execute_editor(&mut self, editor: &mut Editor) {
         editor.scroll_down();
     }

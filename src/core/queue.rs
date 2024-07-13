@@ -1,7 +1,7 @@
 use super::commands::{command_invoker::CommandInvoker, Command, Commands};
 
 pub struct CommandsQueue {
-    queue: Vec<Commands>
+    queue: Vec<Commands>,
 }
 
 impl CommandsQueue {

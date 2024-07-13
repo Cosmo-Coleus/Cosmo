@@ -16,12 +16,12 @@ impl CommandLine {
     fn check_cmd(self: &mut CommandLine) {
         match self.buffer.as_str() {
             ":q" => {
-              //  self.push_cmd_in_queue(WriteChar('c'));
-              //  self.push_cmd_in_queue(WriteChar('c'));
-              //  self.push_cmd_in_queue(WriteChar('t'));
-              //  self.push_cmd_in_queue(WriteChar('o'));
-              //  self.push_cmd_in_queue(WriteChar('i'));
-            },
+                //  self.push_cmd_in_queue(WriteChar('c'));
+                //  self.push_cmd_in_queue(WriteChar('c'));
+                //  self.push_cmd_in_queue(WriteChar('t'));
+                //  self.push_cmd_in_queue(WriteChar('o'));
+                //  self.push_cmd_in_queue(WriteChar('i'));
+            }
             _ => {}
         }
     }
