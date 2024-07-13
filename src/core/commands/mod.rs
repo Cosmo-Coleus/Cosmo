@@ -4,6 +4,7 @@ pub mod command_invoker;
 pub mod scroll_command;
 pub mod set_mode_command;
 pub mod write_cmd_line_command;
+pub mod run_cmd_line_command;
 
 pub trait Command {
     fn execute_core(&mut self, _core: &mut Core) {}

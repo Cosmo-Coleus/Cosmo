@@ -1,4 +1,4 @@
-use core::Core;
+use core::{commands::command_invoker::CommandInvoker, Core};
 use ratatui::{
     backend::CrosstermBackend,
     crossterm::{

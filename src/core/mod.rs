@@ -1,17 +1,19 @@
 use command_line::CommandLine;
+use commands::command_invoker::CommandInvoker;
 use editor::Editor;
 use ratatui::{
     backend::Backend,
     crossterm::event::{self, Event},
     Terminal,
 };
-use std::io::Result;
+use std::{io::Result, time::Duration};
 use crate::{input::handler::handler_input, ui::ui};
 
 /// Gestion de toutes les actions possible dans **Cosmo**
 pub mod commands;
 /// Gestion de l'editeur **Cosmo**
 mod editor;
+mod queue;
 pub mod command_line;
 pub mod modes;
 mod utils;
@@ -45,8 +47,11 @@ impl Core {
     pub fn run_app<B: Backend>(self: &mut Core, terminal: &mut Terminal<B>) -> Result<()> {
         loop {
             terminal.draw(|frame| ui(frame, self))?;
-            if let Event::Key(key) = event::read()? {
-                handler_input(key.code, self)
+            // self.queue.run_cmd_in_queue();
+            if event::poll(Duration::from_micros(16))? {
+                if let Event::Key(key) = event::read()? {
+                    handler_input(key.code, self)
+                }
             }
             if self.editor.input_mode == InputMode::Exit {
                 break;
