@@ -1,6 +1,7 @@
 use command_line::CommandLine;
 use commands::command_invoker::CommandInvoker;
 use editor::Editor;
+use queue::CommandsQueue;
 use ratatui::{
     backend::Backend,
     crossterm::event::{self, Event},
@@ -13,7 +14,7 @@ use crate::{input::handler::handler_input, ui::ui};
 pub mod commands;
 /// Gestion de l'editeur **Cosmo**
 mod editor;
-mod queue;
+pub mod queue;
 pub mod command_line;
 pub mod modes;
 mod utils;
@@ -32,6 +33,7 @@ pub enum InputMode {
 pub struct Core {
     pub editor: Editor,
     pub command_line: CommandLine,
+    pub queue: CommandsQueue
 }
 
 impl Core {
@@ -40,6 +42,7 @@ impl Core {
         Self {
             editor: Editor::new(),
             command_line: CommandLine::new(),
+            queue: CommandsQueue::new()
         }
     }
 
@@ -47,12 +50,13 @@ impl Core {
     pub fn run_app<B: Backend>(self: &mut Core, terminal: &mut Terminal<B>) -> Result<()> {
         loop {
             terminal.draw(|frame| ui(frame, self))?;
-            // self.queue.run_cmd_in_queue();
             if event::poll(Duration::from_micros(16))? {
                 if let Event::Key(key) = event::read()? {
-                    handler_input(key.code, self)
+                    handler_input(key.code, &mut self.queue, &self.editor.input_mode);
                 }
             }
+            let mut invoker = CommandInvoker::new(self);
+            invoker.run_cmd();
             if self.editor.input_mode == InputMode::Exit {
                 break;
             }

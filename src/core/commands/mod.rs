@@ -11,3 +11,16 @@ pub trait Command {
     fn execute_editor(&mut self, _editor: &mut Editor) {}
     fn execute_cmd_line(&mut self, _cmd: &mut CommandLine) {}
 }
+
+pub enum Commands {
+    ScrollUp,
+    ScrollDown,
+    SetInsertMode,
+    SetNormalMode,
+    SetCommandMode,
+    SetExitMode,
+    WriteChar,
+    RemoveChar,
+    CleanBuffer,
+    RunCmdLine
+}
