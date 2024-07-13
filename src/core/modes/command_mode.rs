@@ -8,13 +8,13 @@ pub fn command_mode(key: KeyCode, queue: &mut CommandsQueue) {
         KeyCode::Char(ch) => queue.push_cmd(Commands::WriteChar(ch)),
         KeyCode::Backspace => queue.push_cmd(Commands::RemoveChar),
         KeyCode::Enter => {
-            //     invoker.execute_command(RunCmdLine);
-            queue.push_cmd(Commands::SetNormalMode);
             queue.push_cmd(Commands::CleanBuffer);
+            queue.push_cmd(Commands::SetNormalMode);
+            queue.push_cmd(Commands::RunCmdLine);
         }
         KeyCode::Esc => {
-            queue.push_cmd(Commands::SetNormalMode);
             queue.push_cmd(Commands::CleanBuffer);
+            queue.push_cmd(Commands::SetNormalMode);
         }
         _ => {}
     }

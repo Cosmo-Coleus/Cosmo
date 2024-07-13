@@ -1,27 +1,20 @@
-use crate::core::{command_line::CommandLine, Core};
+use crate::core::{command_line::CommandLine, queue::CommandsQueue, Core};
 
-use super::{set_mode_command::SetExitMode, write_cmd_line_command::WriteChar, Command};
+use super::{Command, Commands};
 
 pub struct RunCmdLine;
 
 impl Command for RunCmdLine {
-    fn execute_cmd_line(&mut self, cmd: &mut CommandLine) {
-        cmd.check_cmd();
+fn execute_core(&mut self, core: &mut Core) {
+        core.command_line.check_cmd(&mut core.queue);
     }
 }
 
 impl CommandLine {
-    /// Temporaire
-    /// TODO: Faire une file d'attente pour gerer les commandes imbrique
-    fn check_cmd(self: &mut CommandLine) {
+    /// Temporaire mais c'est l'idee mdr
+    fn check_cmd(self: &CommandLine, queue: &mut CommandsQueue) {
         match self.buffer.as_str() {
-            ":q" => {
-                //  self.push_cmd_in_queue(WriteChar('c'));
-                //  self.push_cmd_in_queue(WriteChar('c'));
-                //  self.push_cmd_in_queue(WriteChar('t'));
-                //  self.push_cmd_in_queue(WriteChar('o'));
-                //  self.push_cmd_in_queue(WriteChar('i'));
-            }
+            ":q" => queue.push_cmd(Commands::SetExitMode),
             _ => {}
         }
     }
