@@ -14,6 +14,7 @@ pub trait Command {
 }
 
 pub enum Commands {
+    ResetScroll,
     ScrollUp,
     ScrollDown,
     SetInsertMode,

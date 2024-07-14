@@ -1,5 +1,5 @@
 use super::{
-    manage_file::OpenFile, run_cmd_line_command::RunCmdLine, scroll_command::{ScrollDown, ScrollUp}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}, write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar}, Command, Commands
+    manage_file::OpenFile, run_cmd_line_command::RunCmdLine, scroll_command::{ResetScroll, ScrollDown, ScrollUp}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}, write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar}, Command, Commands
 };
 use crate::core::Core;
 
@@ -19,6 +19,7 @@ impl<'a> CommandInvoker<'a> {
 
     pub fn execute_command(self: &mut CommandInvoker<'a>, cmds: Commands) {
         let mut cmd: Box<dyn Command> = match cmds {
+            Commands::ResetScroll => Box::new(ResetScroll),
             Commands::ScrollUp => Box::new(ScrollUp),
             Commands::ScrollDown => Box::new(ScrollDown),
             Commands::SetInsertMode => Box::new(SetInsertMode),

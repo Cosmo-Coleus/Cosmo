@@ -1,7 +1,7 @@
 use super::InputMode;
 use std::{
     fs::File,
-    io::{BufReader, Read},
+    io::{BufReader, Read}, path::{Path, PathBuf},
 };
 
 /// Representation des donnees de l'editeur
@@ -9,6 +9,7 @@ pub struct Editor {
     pub input_mode: InputMode,
     pub scroll: (u16, u16),
     pub text_buffer: Vec<u8>,
+    pub file_path: PathBuf
 }
 
 impl Editor {
@@ -20,11 +21,13 @@ impl Editor {
             input_mode: InputMode::Normal,
             scroll: (0, 0),
             text_buffer: buffer,
+            file_path: PathBuf::new()
         }
     }
 
-    pub fn open_file(self: &mut Editor, cmd: &String) {
-        let file = File::open(cmd).unwrap();
+    pub fn open_file(self: &mut Editor, path: &String) {
+        self.file_path = PathBuf::from(path);
+        let file = File::open(&self.file_path).unwrap();
         let mut buf_reader = BufReader::new(file);
         let mut content = String::new();
         buf_reader.read_to_string(&mut content).unwrap();

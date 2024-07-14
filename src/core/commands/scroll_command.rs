@@ -2,8 +2,15 @@ use super::Command;
 use crate::core::editor::Editor;
 use std::io::BufRead;
 
+pub struct ResetScroll;
 pub struct ScrollUp;
 pub struct ScrollDown;
+
+impl Command for ResetScroll {
+    fn execute_editor(&mut self, editor: &mut Editor) {
+        editor.reset_scroll();
+    }
+}
 
 impl Command for ScrollUp {
     fn execute_editor(&mut self, editor: &mut Editor) {
@@ -18,6 +25,10 @@ impl Command for ScrollDown {
 }
 
 impl Editor {
+    pub fn reset_scroll(&mut self) {
+        self.scroll = (0, 0)
+    }
+
     /// Permet de scroller le text de [`Editor`](struct@Editor) d'un ligne vers le haut
     fn scroll_up(self: &mut Editor) {
         let num_lines = self.text_buffer.lines().count();
