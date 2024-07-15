@@ -20,7 +20,7 @@ impl Command for SetNormalMode {
 
 impl Command for SetCommandMode {
     fn execute_core(&mut self, core: &mut Core) {
-        core.command_line.cursor.set_pos(0, 0);
+        core.set_cursor_pos(0, 40);
         core.editor.set_mode(InputMode::Command);
     }
 }

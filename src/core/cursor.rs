@@ -9,7 +9,7 @@ impl Cursor {
         Self { pos: (x, y) }
     }
 
-    pub fn set_cursor(&mut self, frame: &mut Frame) {
+    pub fn set_cursor(&self, frame: &mut Frame) {
         frame.set_cursor(self.pos.0, self.pos.1);
     }
 

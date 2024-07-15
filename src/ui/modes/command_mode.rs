@@ -1,15 +1,15 @@
+use std::rc::Rc;
+
 use ratatui::{layout::Rect, style::{Color, Style, Stylize}, Frame};
 
-use crate::{core::command_line::CommandLine, ui::command_line};
+use crate::{core::Core, ui::command_line};
 
 /// Rendu du mode [`InputMode::Command`](enum@crate::app::InputMode).
-pub fn draw(cmd_line: &mut CommandLine, frame: &mut Frame, area: Rect) {
+pub fn draw(core: &mut Core, frame: &mut Frame, chunks: Rc<[Rect]>) {
     command_line::draw(
         frame,
-        area,
         " COMMAND MODE ",
         Style::default().bold().fg(Color::Black).bg(Color::Green),
-        Some(cmd_line),
+        chunks,
     );
-    cmd_line.cursor.set_cursor(frame);
 }

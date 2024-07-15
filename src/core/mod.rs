@@ -32,7 +32,7 @@ pub struct Core {
     pub editor: Editor,
     pub command_line: CommandLine,
     pub queue: CommandsQueue,
-    cursor: Cursor
+    pub cursor: Cursor
 }
 
 impl Core {
@@ -46,15 +46,19 @@ impl Core {
         }
     }
 
-    fn set_cursor(&mut self, frame: &mut Frame) {
+    pub fn set_cursor(&mut self, frame: &mut Frame) {
         let mode = self.editor.input_mode;
 
         match mode {
-            InputMode::Normal => self.editor.cursor.set_cursor(frame),
-            InputMode::Insert => todo!(),
-            InputMode::Command => self.command_line.cursor.set_cursor(frame),
+            InputMode::Normal => self.cursor.set_cursor(frame),
+            InputMode::Insert => self.cursor.set_cursor(frame),
+            InputMode::Command => self.cursor.set_cursor(frame),
             InputMode::Exit => {},
         }
+    }
+
+    pub fn set_cursor_pos(&mut self, x: u16, y: u16) {
+        self.cursor.set_pos(x, y);
     }
 
     /// Contient la boucle de rendu et d'évévement de **Cosmo**.
