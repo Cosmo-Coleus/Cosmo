@@ -40,7 +40,7 @@ impl TextCommand {
         if !parsed_command.args.is_empty() {
             return;
         }
-        queue.push_cmd(Commands::SetExitMode)
+        queue.push_cmd(Commands::SetExitMode);
     }
 
     pub fn edit_file_text_command(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandsQueue) {
@@ -50,6 +50,6 @@ impl TextCommand {
         if parsed_command.args.is_empty() || parsed_command.args.len() != 1 {
             return;
         }
-        queue.push_cmd(Commands::OpenFile(parsed_command.args[0].clone()))
+        queue.push_cmd(Commands::OpenFile(parsed_command.args[0].clone()));
     }
 }

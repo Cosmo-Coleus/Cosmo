@@ -26,7 +26,7 @@ impl Command for ScrollDown {
 
 impl Editor {
     pub fn reset_scroll(&mut self) {
-        self.scroll = (0, 0)
+        self.scroll = (0, 0);
     }
 
     /// Permet de scroller le text de [`Editor`](struct@Editor) d'un ligne vers le haut

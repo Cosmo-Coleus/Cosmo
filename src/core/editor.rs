@@ -1,7 +1,7 @@
 use super::InputMode;
 use std::{
     fs::File,
-    io::{BufReader, Read}, path::{Path, PathBuf},
+    io::{BufReader, Read}, path::PathBuf,
 };
 
 /// Representation des donnees de l'editeur
