@@ -1,6 +1,5 @@
 use super::{
-    commands::Commands,
-    queue::CommandsQueue,
+    commands::Commands, cursor::Cursor, queue::CommandsQueue
 };
 
 pub struct ParsedCommand {
@@ -11,12 +10,14 @@ pub struct ParsedCommand {
 /// Réprésente la ligne de commande utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {
     pub buffer: String,
+    pub cursor: Cursor
 }
 
 impl CommandLine {
-    pub const fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             buffer: String::new(),
+            cursor: Cursor::new(0, 0),
         }
     }
 

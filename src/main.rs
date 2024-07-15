@@ -29,7 +29,7 @@ fn init_and_run() -> Result<()> {
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
     let mut core = Core::new();
     terminal.clear()?;
-    terminal.show_cursor()?;
     core.run_app(&mut terminal)?;
+    terminal.show_cursor()?;
     Ok(())
 }

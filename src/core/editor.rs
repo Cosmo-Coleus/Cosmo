@@ -1,4 +1,4 @@
-use super::InputMode;
+use super::{cursor::Cursor, InputMode};
 use std::{
     fs::File,
     io::{BufReader, Read}, path::PathBuf,
@@ -9,7 +9,8 @@ pub struct Editor {
     pub input_mode: InputMode,
     pub scroll: (u16, u16),
     pub text_buffer: Vec<u8>,
-    pub file_path: PathBuf
+    pub file_path: PathBuf,
+    pub cursor: Cursor
 }
 
 impl Editor {
@@ -21,7 +22,8 @@ impl Editor {
             input_mode: InputMode::Normal,
             scroll: (0, 0),
             text_buffer: buffer,
-            file_path: PathBuf::new()
+            file_path: PathBuf::new(),
+            cursor: Cursor::new(0, 0)
         }
     }
 

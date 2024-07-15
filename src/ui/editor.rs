@@ -1,16 +1,8 @@
-use ratatui::{
-    layout::Rect,
-    style::{Color, Style, Stylize},
-    text::{Line, Span},
-    widgets::Paragraph,
-    Frame,
-};
-
+use ratatui::{layout::Rect, style::{Color, Style, Stylize}, text::{Line, Span}, widgets::Paragraph, Frame};
 use crate::core::Core;
 
-/// Gère le rendu graphique de l'éditeur de texte
-pub fn ui_editor_view(app: &mut Core, frame: &mut Frame, area: Rect) {
-    let text = std::str::from_utf8(&app.editor.text_buffer).unwrap();
+pub fn draw(frame: &mut Frame, core: &mut Core, area: Rect) {
+    let text = std::str::from_utf8(&core.editor.text_buffer).unwrap();
     let lines: Vec<&str> = text.lines().collect();
     let mut new_lines = Vec::new();
     for (i, line) in lines.iter().enumerate() {
@@ -26,7 +18,7 @@ pub fn ui_editor_view(app: &mut Core, frame: &mut Frame, area: Rect) {
     frame.render_widget(
         Paragraph::new(new_lines)
             .bg(Color::Rgb(0x2b, 0x2d, 0x3a))
-            .scroll(app.editor.scroll),
+            .scroll(core.editor.scroll),
         area,
     );
 }

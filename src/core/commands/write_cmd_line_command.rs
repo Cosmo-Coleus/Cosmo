@@ -7,6 +7,7 @@ pub struct CleanBuffer;
 
 impl Command for WriteChar {
     fn execute_cmd_line(&mut self, cmd: &mut CommandLine) {
+        cmd.cursor.move_to_end_buf(&cmd.buffer);
         cmd.add_char_in_cmd_line(self.0);
     }
 }
