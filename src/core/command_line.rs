@@ -27,10 +27,11 @@ impl CommandLine {
     }
 }
 
-pub struct TextCommand;
+pub mod text_command {
+    use super::ParsedCommand;
+    use crate::core::{commands::Commands, queue::CommandQueue};
 
-impl TextCommand {
-    pub fn quit_text_command(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandQueue) {
+    pub fn quit(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandQueue) {
         if parsed_command.cmd != cmd {
             return;
         }
@@ -40,11 +41,7 @@ impl TextCommand {
         queue.push_cmd(Commands::SetExitMode);
     }
 
-    pub fn edit_file_text_command(
-        parsed_command: &ParsedCommand,
-        cmd: &str,
-        queue: &mut CommandQueue,
-    ) {
+    pub fn edit_file(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandQueue) {
         if parsed_command.cmd != cmd {
             return;
         }
