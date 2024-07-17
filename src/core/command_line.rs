@@ -1,14 +1,11 @@
-use super::{
-    commands::Commands,
-    queue::CommandsQueue,
-};
+use super::{commands::Commands, queue::CommandsQueue};
 
 pub struct ParsedCommand {
     pub cmd: String,
     pub args: Vec<String>,
 }
 
-/// Réprésente la ligne de commande utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
+/// Réprésente la CLI utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {
     pub buffer: String,
 }
@@ -43,7 +40,11 @@ impl TextCommand {
         queue.push_cmd(Commands::SetExitMode);
     }
 
-    pub fn edit_file_text_command(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandsQueue) {
+    pub fn edit_file_text_command(
+        parsed_command: &ParsedCommand,
+        cmd: &str,
+        queue: &mut CommandsQueue,
+    ) {
         if parsed_command.cmd != cmd {
             return;
         }

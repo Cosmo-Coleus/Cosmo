@@ -11,9 +11,9 @@ use ratatui::{
 use std::{io::Result, time::Duration};
 
 pub mod command_line;
-/// Gestion de toutes les actions possible dans **Cosmo**
+/// Gestion de toutes les actions possibles dans **Cosmo**
 pub mod commands;
-/// Gestion de l'editeur **Cosmo**
+/// Gestion de l'éditeur **Cosmo**
 mod editor;
 pub mod modes;
 pub mod queue;
@@ -28,7 +28,7 @@ pub enum InputMode {
     Exit,
 }
 
-/// Representation de tous les modules de **Cosmo**
+/// Représentation de tous les modules de **Cosmo**
 pub struct Core {
     pub editor: Editor,
     pub command_line: CommandLine,
@@ -36,7 +36,7 @@ pub struct Core {
 }
 
 impl Core {
-    /// Crée une nouvelle instance de [`Core`].
+    /// Créée une nouvelle instance de [`Core`].
     pub fn new() -> Self {
         Self {
             editor: Editor::new(),
@@ -45,7 +45,7 @@ impl Core {
         }
     }
 
-    /// Contient la boucle de rendu et d'évévement de **Cosmo**.
+    /// Contient la boucle de rendu et d'évèvement de **Cosmo**.
     pub fn run_app<B: Backend>(self: &mut Core, terminal: &mut Terminal<B>) -> Result<()> {
         loop {
             terminal.draw(|frame| ui(frame, self))?;

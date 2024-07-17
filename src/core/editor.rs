@@ -1,15 +1,16 @@
 use super::InputMode;
 use std::{
     fs::File,
-    io::{BufReader, Read}, path::PathBuf,
+    io::{BufReader, Read},
+    path::PathBuf,
 };
 
-/// Representation des donnees de l'editeur
+/// Représentation des données de l'éditeur
 pub struct Editor {
     pub input_mode: InputMode,
     pub scroll: (u16, u16),
     pub text_buffer: Vec<u8>,
-    pub file_path: PathBuf
+    pub file_path: PathBuf,
 }
 
 impl Editor {
@@ -21,7 +22,7 @@ impl Editor {
             input_mode: InputMode::Normal,
             scroll: (0, 0),
             text_buffer: buffer,
-            file_path: PathBuf::new()
+            file_path: PathBuf::new(),
         }
     }
 

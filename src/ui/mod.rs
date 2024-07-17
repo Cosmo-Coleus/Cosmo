@@ -10,9 +10,9 @@ use ratatui::{
 use ui_editor_modes::{ui_command_mode, ui_insert_mode, ui_normal_mode};
 use ui_editor_view::ui_editor_view;
 
-/// # Warning
-/// Cette fonction est temporaire et sera très certainement supprimé dans le futur.
-/// Crée le rendu en fonction de l'[`InputMode`](enum@InputMode) actuel.
+#[deprecated(
+    note = "Cette fonction est temporaire et sera très certainement supprimé dans le futur."
+)]
 pub fn ui(frame: &mut Frame, app: &mut Core) {
     let area = Layout::default()
         .direction(Direction::Vertical)

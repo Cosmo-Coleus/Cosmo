@@ -1,5 +1,10 @@
 use super::{
-    manage_file::OpenFile, run_cmd_line_command::RunCmdLine, scroll_command::{ResetScroll, ScrollDown, ScrollUp}, set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode}, write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar}, Command, Commands
+    manage_file::OpenFile,
+    run_cmd_line_command::RunCmdLine,
+    scroll_command::{ResetScroll, ScrollDown, ScrollUp},
+    set_mode_command::{SetCommandMode, SetExitMode, SetInsertMode, SetNormalMode},
+    write_cmd_line_command::{CleanBuffer, RemoveChar, WriteChar},
+    Command, Commands,
 };
 use crate::core::Core;
 

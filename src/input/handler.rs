@@ -5,7 +5,7 @@ use crate::core::{
 };
 use ratatui::crossterm::event::KeyCode;
 
-/// Recupere les KeyCode pour ensuite les traiter en fonction du context ([`InputMode`](enum@InputMode))
+/// Récupère les KeyCode pour ensuite les traiter en fonction du contexte ([`InputMode`](enum@InputMode))
 pub fn handler_input(key: KeyCode, queue: &mut CommandsQueue, input_mode: &InputMode) {
     match input_mode {
         InputMode::Normal => handler_input_nomal_mode(key, queue),
