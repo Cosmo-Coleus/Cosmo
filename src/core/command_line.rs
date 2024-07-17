@@ -1,4 +1,4 @@
-use super::{commands::Commands, queue::CommandsQueue};
+use super::{commands::Commands, queue::CommandQueue};
 
 pub struct ParsedCommand {
     pub cmd: String,
@@ -30,7 +30,7 @@ impl CommandLine {
 pub struct TextCommand;
 
 impl TextCommand {
-    pub fn quit_text_command(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandsQueue) {
+    pub fn quit_text_command(parsed_command: &ParsedCommand, cmd: &str, queue: &mut CommandQueue) {
         if parsed_command.cmd != cmd {
             return;
         }
@@ -43,7 +43,7 @@ impl TextCommand {
     pub fn edit_file_text_command(
         parsed_command: &ParsedCommand,
         cmd: &str,
-        queue: &mut CommandsQueue,
+        queue: &mut CommandQueue,
     ) {
         if parsed_command.cmd != cmd {
             return;

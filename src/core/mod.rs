@@ -2,7 +2,7 @@ use crate::{input::handler::handler_input, ui::ui};
 use command_line::CommandLine;
 use commands::command_invoker::CommandInvoker;
 use editor::Editor;
-use queue::CommandsQueue;
+use queue::CommandQueue;
 use ratatui::{
     backend::Backend,
     crossterm::event::{self, Event},
@@ -32,7 +32,7 @@ pub enum InputMode {
 pub struct Core {
     pub editor: Editor,
     pub command_line: CommandLine,
-    pub queue: CommandsQueue,
+    pub queue: CommandQueue,
 }
 
 impl Core {
@@ -41,7 +41,7 @@ impl Core {
         Self {
             editor: Editor::new(),
             command_line: CommandLine::new(),
-            queue: CommandsQueue::new(),
+            queue: CommandQueue::new(),
         }
     }
 

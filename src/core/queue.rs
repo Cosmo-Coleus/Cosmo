@@ -1,10 +1,10 @@
 use super::commands::Commands;
 
-pub struct CommandsQueue {
+pub struct CommandQueue {
     queue: Vec<Commands>,
 }
 
-impl CommandsQueue {
+impl CommandQueue {
     pub fn new() -> Self {
         Self { queue: Vec::new() }
     }

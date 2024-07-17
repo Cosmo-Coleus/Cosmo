@@ -1,6 +1,6 @@
 use crate::core::{
     command_line::{CommandLine, TextCommand},
-    queue::CommandsQueue,
+    queue::CommandQueue,
     Core,
 };
 
@@ -15,7 +15,7 @@ impl Command for RunCmdLine {
 }
 
 impl CommandLine {
-    fn cmd_check(self: &CommandLine, queue: &mut CommandsQueue) {
+    fn cmd_check(self: &CommandLine, queue: &mut CommandQueue) {
         let parsed_cmd = self.parser();
         TextCommand::quit_text_command(&parsed_cmd, ":q", queue);
         TextCommand::edit_file_text_command(&parsed_cmd, ":e", queue);
