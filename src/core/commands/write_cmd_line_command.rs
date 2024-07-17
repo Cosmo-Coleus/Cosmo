@@ -7,13 +7,13 @@ pub struct CleanBuffer;
 
 impl Command for WriteChar {
     fn execute_cmd_line(&mut self, cmd: &mut CommandLine) {
-        cmd.add_char_in_cmd_line(self.0);
+        cmd.add_char(self.0);
     }
 }
 
 impl Command for RemoveChar {
     fn execute_cmd_line(&mut self, cmd: &mut CommandLine) {
-        cmd.remove_char_in_cmd_line();
+        cmd.remove_char();
     }
 }
 
@@ -24,11 +24,11 @@ impl Command for CleanBuffer {
 }
 
 impl CommandLine {
-    fn add_char_in_cmd_line(self: &mut CommandLine, ch: char) {
+    fn add_char(self: &mut CommandLine, ch: char) {
         self.buffer.push(ch);
     }
 
-    fn remove_char_in_cmd_line(self: &mut CommandLine) {
+    fn remove_char(self: &mut CommandLine) {
         self.buffer.pop();
     }
 
