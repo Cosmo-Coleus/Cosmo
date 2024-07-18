@@ -1,5 +1,4 @@
 use crate::core::editor::Editor;
-
 use super::Command;
 
 pub struct OpenFile(pub String);

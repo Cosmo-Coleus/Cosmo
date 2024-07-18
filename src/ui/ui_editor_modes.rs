@@ -5,8 +5,8 @@ use ratatui::{
     widgets::Paragraph,
     Frame,
 };
-
 use crate::core::{command_line::CommandLine, Core};
+
 /// Rendu du mode [`InputMode::Normal`](enum@crate::app::InputMode).
 pub fn ui_normal_mode(frame: &mut Frame, area: Rect) {
     footer_line(
@@ -32,6 +32,7 @@ pub fn ui_insert_mode(frame: &mut Frame, area: Rect) {
 /// Rendu du mode [`InputMode::Command`](enum@crate::app::InputMode).
 pub fn ui_command_mode(app: &mut Core, frame: &mut Frame, area: Rect) {
     let mut command_line = &mut app.command_line;
+
     footer_line(
         frame,
         area,
@@ -64,5 +65,6 @@ pub fn footer_line(
         Span::styled(text, style),
     ])
     .style(Style::default().bg(Color::Rgb(0x2f, 0x32, 0x42)));
+
     frame.render_widget(Paragraph::new(line), area);
 }

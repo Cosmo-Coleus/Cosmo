@@ -1,4 +1,4 @@
-use core::Core;
+use std::io::{stdout, Result};
 use ratatui::{
     backend::CrosstermBackend,
     crossterm::{
@@ -7,7 +7,7 @@ use ratatui::{
     },
     Terminal,
 };
-use std::io::{stdout, Result};
+use core::Core;
 
 /// Gestion de l'ensemble de **Cosmo**
 mod core;
@@ -28,6 +28,7 @@ fn main() -> Result<()> {
 fn init_and_run() -> Result<()> {
     let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
     let mut core = Core::new();
+
     terminal.clear()?;
     terminal.show_cursor()?;
     core.run_app(&mut terminal)?;

@@ -1,9 +1,9 @@
-use super::InputMode;
 use std::{
     fs::File,
     io::{BufReader, Read},
     path::PathBuf,
 };
+use super::InputMode;
 
 /// Représentation des données de l'éditeur
 pub struct Editor {

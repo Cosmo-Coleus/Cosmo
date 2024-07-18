@@ -1,14 +1,14 @@
-use crate::{input::handler::handler_input, ui::ui};
-use command_line::CommandLine;
-use commands::command_invoker::CommandInvoker;
-use editor::Editor;
-use queue::CommandQueue;
+use std::{io::Result, time::Duration};
 use ratatui::{
     backend::Backend,
     crossterm::event::{self, Event},
     Terminal,
 };
-use std::{io::Result, time::Duration};
+use crate::{input::handler::handler_input, ui::ui};
+use command_line::CommandLine;
+use commands::command_invoker::CommandInvoker;
+use editor::Editor;
+use queue::CommandQueue;
 
 pub mod command_line;
 /// Gestion de toutes les actions possibles dans **Cosmo**
@@ -17,7 +17,6 @@ pub mod commands;
 mod editor;
 pub mod modes;
 pub mod queue;
-mod utils;
 
 /// Liste les différents modes d'interaction de l'IDE.
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
@@ -54,7 +53,9 @@ impl Core {
                     handler_input(key.code, &mut self.queue, &self.editor.input_mode);
                 }
             }
+
             let mut invoker = CommandInvoker::new(self);
+
             invoker.run_cmd();
             if self.editor.input_mode == InputMode::Exit {
                 break;

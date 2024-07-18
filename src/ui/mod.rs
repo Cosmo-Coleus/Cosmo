@@ -1,14 +1,14 @@
-mod ui_editor_modes;
-mod ui_editor_view;
-
-use crate::core::{Core, InputMode};
 use ratatui::{
     layout::{Constraint, Direction, Layout},
     widgets::Block,
     Frame,
 };
+use crate::core::{Core, InputMode};
 use ui_editor_modes::{ui_command_mode, ui_insert_mode, ui_normal_mode};
 use ui_editor_view::ui_editor_view;
+
+mod ui_editor_modes;
+mod ui_editor_view;
 
 #[deprecated(
     note = "Cette fonction est temporaire et sera très certainement supprimé dans le futur."

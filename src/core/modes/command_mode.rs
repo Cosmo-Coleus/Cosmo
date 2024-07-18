@@ -1,5 +1,4 @@
 use ratatui::crossterm::event::KeyCode;
-
 use crate::core::{commands::Commands, queue::CommandQueue};
 
 /// Récupère toutes les touches pressées en [`InputMode::Command`] et les associe au comportement attendu.
