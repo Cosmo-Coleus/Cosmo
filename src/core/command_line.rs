@@ -3,7 +3,7 @@ pub struct ParsedCommand {
     pub args: Vec<String>,
 }
 
-/// Réprésente la CLI utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
+/// Représente la CLI utilisable dans le mode [`InputMode::Command`](type@InputMode::Command)
 pub struct CommandLine {
     pub buffer: String,
 }

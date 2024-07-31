@@ -7,7 +7,7 @@ mod scroll_command;
 mod set_mode_command;
 mod write_cmd_line_command;
 
-pub trait Command {
+pub trait CommandExecutable {
     fn execute_core(&mut self, _core: &mut Core) {}
     fn execute_editor(&mut self, _editor: &mut Editor) {}
     fn execute_cmd_line(&mut self, _cmd: &mut CommandLine) {}
